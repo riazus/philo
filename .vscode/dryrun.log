@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/rusmanov/philo'
+clang -c main.c -o main.o
+clang main.o -o philo
+make: Leaving directory '/home/rusmanov/philo'
+ 
