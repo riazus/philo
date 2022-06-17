@@ -3,7 +3,7 @@ SRCS	=	main.c
 OBJS	=	$(SRCS:.c=.o)
 HEADER	=	philo.h
 CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror -I $(HEADER)
+CFLAGS	=	-Wall -Wextra -Werror fsanitize=thread -g -I $(HEADER)
 
 all		:	$(NAME)
 

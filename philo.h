@@ -6,17 +6,29 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-struct  s_phil
+
+typedef struct s_data
 {
-    int num;
+    int number_of_philo;
+    int time_to_eat;
+    int time_to_sleep;
+    int time_to_die;
+    int count_of_eat;
+}               t_data;
+
+
+typedef struct  s_phil
+{
+    pthread_t id;
+    int status;
     int right_fork;
     int left_fork;
     int sleep;
     int eat;
     int die;
-}		t_phil;
+}     t_phil;
 
-
+int ft_atoi(char *str);
 
 
 #endif
