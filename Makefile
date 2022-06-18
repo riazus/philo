@@ -1,23 +1,23 @@
 NAME	=	philo
-SRCS	=	main.c
+SRCS	=	main.c utils.c
 OBJS	=	$(SRCS:.c=.o)
 HEADER	=	philo.h
 CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror fsanitize=thread -g -I $(HEADER)
+CFLAGS	=	-Wall -Wextra -Werror #fsanitize=thread -g
 
 all		:	$(NAME)
 
-$(NAME)	:	$(OBJS)
-			$(CC) $(OBJS) -o $(NAME)
+$(NAME)	:	$(OBJS) $(HEADER)
+			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o		:	%.c $(HEADER)
-			$(CC) -c $< -o $@
+			@$(CC) -c $< -o $@
 			
 clean	:	
-			rm -rf $(OBJS)
+			@rm -rf $(OBJS)
 
 fclean	:	clean
-			rm -rf $(NAME)
+			@rm -rf $(NAME)
 
 re		:	fclean all
 
