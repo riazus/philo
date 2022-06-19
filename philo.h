@@ -15,6 +15,7 @@ typedef struct s_data
 	int time_to_die;
 	int count_of_eat;
 	pthread_mutex_t *forks;
+	pthread_mutex_t picking_forks;
 }               t_data;
 
 
@@ -23,7 +24,7 @@ typedef struct  s_phil
 {
 	pthread_t       id;
 	int             status;
-	const char      *name;
+	int				key;
 	unsigned int    left_fork;
 	unsigned int    right_fork;
 	t_data          data;

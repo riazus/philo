@@ -76,35 +76,34 @@ void init_table(table_t *table) {
 		pthread_mutex_init(&table->forks[i], NULL);
 	}
 }
-
+*/
 void* eat(void *args)
 {
-	philosopher_args_t *arg = (philosopher_args_t*) args;
-	const philosopher_t *philosopher = arg->philosopher;
-	const table_t *table = arg->table;
-	unsigned rand;
+	// philosopher_args_t *arg = (philosopher_args_t*) args;
+	// const philosopher_t *philosopher = arg->philosopher;
+	// const table_t *table = arg->table;
+	t_phil	*phil = (t_phil*) args;
+	t_data	data = phil->data;
 
 	while (1)
 	{
-		printf("%s started dinner\n", philosopher->name);
+		printf("%d started dinner\n", phil->key);
+		printf("|%d - lol|\n", data.number_of_philo);
+		pthread_mutex_lock(&data.picking_forks);
+		pthread_mutex_lock(&data.forks[phil->left_fork]);
+		sleep(20000000);
+		pthread_mutex_lock(&data.forks[phil->right_fork]);
+		pthread_mutex_unlock(&data.picking_forks);
 
-		pthread_mutex_lock(&entry_point);
-		pthread_mutex_lock(&table->forks[philosopher->left_fork]);
-		srand(&rand);
-		rand %= 1000;
-		sleep(rand);
-		pthread_mutex_lock(&table->forks[philosopher->right_fork]);
-		pthread_mutex_unlock(&entry_point);
+		printf("%d is eating after %d ms sleep\n", phil->key, 3);
 
-		printf("%s is eating after %d ms sleep\n", philosopher->name, rand);
+		pthread_mutex_unlock(&data.forks[phil->right_fork]);
+		pthread_mutex_unlock(&data.forks[phil->left_fork]);
 
-		pthread_mutex_unlock(&table->forks[philosopher->right_fork]);
-		pthread_mutex_unlock(&table->forks[philosopher->left_fork]);
-
-		printf("%s finished dinner\n", philosopher->name);
+		printf("%d finished dinner\n", phil->key);
 	}
 }
-*/
+
 void parse_args(char **argv, int argc, t_data *data)
 {
 	if (argc == 5 || argc == 6)
@@ -135,7 +134,8 @@ void    init_table(t_data *data)
 	int i;
 	
 	i = 0;
-	data->forks = malloc(sizeof (pthread_mutex_t) * data->number_of_philo);
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->number_of_philo);
+	pthread_mutex_init(&data->picking_forks, NULL);
 	while (i < data->number_of_philo)
 	{
 		pthread_mutex_init(&data->forks[i], NULL);
@@ -143,7 +143,7 @@ void    init_table(t_data *data)
 	}
 }
 
-void init_philos(t_phil *phil, t_data *data)
+t_phil *init_philos(t_phil *phil, t_data *data)
 {
 	int i;
 	
@@ -151,13 +151,18 @@ void init_philos(t_phil *phil, t_data *data)
 	phil = malloc (sizeof(t_phil) * data->number_of_philo);
 	while (i < data->number_of_philo)
 	{
+		if (phil[i].status != 0)
+			error_msg("something wrong\n");
+		phil[i].key = i;
 		phil[i].left_fork = i;
 		if (i + 1 == data->number_of_philo)
 			phil[i].right_fork = 0;
 		else
 			phil[i].right_fork = i + 1;
+		phil[i].status = pthread_create(&phil[i].id, NULL, eat, &phil[i]);
 		i++;
 	}
+	return phil;
 }
 
 int main(int argc, char **argv)
@@ -168,51 +173,21 @@ int main(int argc, char **argv)
 
 	parse_args(argv, argc, &data);
 	// printf("|%d - number of philo|\n", data.number_of_philo);
-	// printf("|%d - time to eat|\n", data.time_to_eat);
-	// printf("|%d - time to die|\n", data.time_to_die);
-	// printf("|%d - time to sleep|\n", data.time_to_sleep);
-	// printf("|%d - count of eat|\n", data.count_of_eat);
 	init_table(&data);
-	//init_philos(phil, &data);
-	int i;
-	
-	i = 0;
-	phil = malloc (sizeof(t_phil) * data.number_of_philo);
-	while (i < data.number_of_philo)
-	{
-		phil[i].left_fork = i;
-		if (i + 1 == data.number_of_philo)
-			phil[i].right_fork = 0;
-		else
-			phil[i].right_fork = i + 1;
-		i++;
-	}
-	// pthread_t threads[PHT_SIZE];
-	// philosopher_t philosophers[PHT_SIZE];
-	// philosopher_args_t arguments[PHT_SIZE];
-	// table_t table;
-	// size_t i;
-
-	// init_table(&table);
-
-	// init_philosopher(&philosophers[0], "Alice", 0, 1);
-	// init_philosopher(&philosophers[1], "Bob",   1, 2);
-	// init_philosopher(&philosophers[2], "Clark", 2, 3);
-	// init_philosopher(&philosophers[3], "Denis", 3, 4);
-	// init_philosopher(&philosophers[4], "Eugin", 4, 0);
-
-	// for (i = 0; i < PHT_SIZE; i++) {
-	//     arguments[i].philosopher = &philosophers[i];
-	//     arguments[i].table = &table;
-	// }
-
-	// for (i = 0; i < PHT_SIZE; i++) {
-	//     pthread_create(&threads[i], NULL, eat, &arguments[i]);
-	// }
+	phil = init_philos(phil, &data);
 
 	// for (i = 0; i < PHT_SIZE; i++) {
 	//     pthread_join(threads[i], NULL);
 	// }
+	// int	i;
+
+	// i = 0;
+	// while (i < data.number_of_philo)
+	// {
+	// 	pthread_join(phil[i].id, NULL);
+	// 	i++;
+	// }
 	free(phil);
-	free(&data);
+	free(data.forks);
+	printf("------------------------------\n");
 }
