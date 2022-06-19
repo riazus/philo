@@ -9,18 +9,18 @@ all		:	$(NAME)
 
 $(NAME)	:	$(OBJS) $(HEADER)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-			echo Built!
+			@echo Built!
 
 %.o		:	%.c $(HEADER)
 			@$(CC) -c $< -o $@
 			
 clean	:	
 			@rm -rf $(OBJS)
-			echo Clened!
+			@echo Clened!
 
 fclean	:	clean
 			@rm -rf $(NAME)
-			echo Full cleaned!
+			@echo Full cleaned!
 
 re		:	fclean all
 
