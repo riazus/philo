@@ -32,6 +32,12 @@ void	unlock_forks(t_main *main)
 	}
 }
 
+long long	get_time(void)
+{
+	struct timeval time;
+	
+}
+
 void error_msg(char *str)
 {
 	printf("%s", str);
