@@ -1,5 +1,7 @@
 NAME	=	philo
-SRCS	=	main.c utils.c
+SRCS	=	main.c utils.c init_philos.c \
+			threads.c
+			
 OBJS	=	$(SRCS:.c=.o)
 HEADER	=	philo.h
 CC		=	clang

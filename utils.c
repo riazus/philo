@@ -20,6 +20,18 @@ int	ft_atoi(const char *str)
 	return (result);
 }
 
+void	unlock_forks(t_main *main)
+{
+	int	i;
+
+	i = 0;
+	while (i < main->data.number_of_philo)
+	{
+		pthread_mutex_unlock(&main->forks[i]);
+		i++;
+	}
+}
+
 void error_msg(char *str)
 {
 	printf("%s", str);
