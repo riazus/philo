@@ -25,7 +25,7 @@ void	unlock_forks(t_main *main)
 	int	i;
 
 	i = 0;
-	while (i < main->data.number_of_philo)
+	while (i < main->data.count_of_philo)
 	{
 		pthread_mutex_unlock(&main->forks[i]);
 		i++;
@@ -34,8 +34,10 @@ void	unlock_forks(t_main *main)
 
 long long	get_time(void)
 {
-	struct timeval time;
-	
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec * 0.001));
 }
 
 void error_msg(char *str)
@@ -43,3 +45,4 @@ void error_msg(char *str)
 	printf("%s", str);
 	exit (0);
 }
+

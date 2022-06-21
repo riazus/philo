@@ -5,11 +5,17 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <sys/time.h>
 
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define FORK "has taken a fork"
+# define DIED "died"
 
 typedef struct s_data
 {
-	int number_of_philo;
+	int count_of_philo;
 	int time_to_eat;
 	int time_to_sleep;
 	int time_to_die;
@@ -18,8 +24,8 @@ typedef struct s_data
 
 typedef struct	s_philo
 {
-	int			key;
 	pthread_t	id;
+	int			guid;
 	int			num_of_eates;
 	long long	time_to_die;
 	int    		left_fork;
@@ -29,24 +35,33 @@ typedef struct	s_philo
 
 typedef struct  s_main
 {
-	int				n_thread;
+	int				key;
 	int				philo_dead;
 	long long		t0;	
 	t_philo			*philo;
 	t_data			data;
-	pthread_t		orchestrator;
+	pthread_t		spectator;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write;
 }     t_main;
 
 /*UTILS*/
-int     ft_atoi(const char *str);
-void    error_msg(char *str);
-void	unlock_forks(t_main *main);
+int     	ft_atoi(const char *str);
+void    	error_msg(char *str);
+void		unlock_forks(t_main *main);
+long long	get_time(void);
 
 /*INIT*/
-void	parse_args(char **argv, int argc, t_main *main);
-void	init_philos(t_main *main);
-void	init_forks(t_main *main);
+void		parse_args(char **argv, int argc, t_main *main);
+void		init_philos(t_main *main);
+void		init_forks(t_main *main);
+
+/*TRHEADS*/
+void    	create_threads(t_main *main);
+void    	destroy_mutex(t_main *main);
+
+/*ROUTINE*/
+void    	*routine(void *args);
+void    	*checker(void *args);
 
 #endif
