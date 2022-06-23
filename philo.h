@@ -63,5 +63,6 @@ void    	destroy_mutex(t_main *main);
 /*ROUTINE*/
 void    	*routine(void *args);
 void    	*checker(void *args);
+int		philo_print(t_main *main, int guid, char *status);
 
 #endif
