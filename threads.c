@@ -27,7 +27,7 @@ void    create_threads(t_main *main)
     while (i < main->data.count_of_philo)
     {
         main->key = i;
-        if (pthread_create(main->philo[i].id, NULL, &routine, (void *)main) != 0)
+        if (pthread_create(&main->philo[i].id, NULL, &routine, (void *)main) != 0)
             error_msg("Error while create philos threads\n");
         i++;
         usleep(1000);

@@ -48,7 +48,7 @@ void    *checker(void *args)
     {
         while (main->philo[i].num_of_eates < main->data.count_of_eat && !main->philo_dead)
         {
-            if (phil_is_dead(main, &i))
+            if (philo_is_dead(main, &i))
                 break ;
         }
     }
@@ -56,7 +56,7 @@ void    *checker(void *args)
     {
         while (!main->philo_dead)
         {
-            if (phil_is_dead(main, &i))
+            if (philo_is_dead(main, &i))
                 break ;
         }
     }

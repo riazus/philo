@@ -1,0 +1,12 @@
+make: Entering directory `/Users/jannabel/philo'
+clang -c main.c -o main.o
+ 
+clang -c utils.c -o utils.o
+clang -c init_philos.c -o init_philos.o
+clang -c threads.c -o threads.o
+clang -c routine.c -o routine.o
+clang -c actions.c -o actions.o
+clang -Wall -Wextra -Werror  main.o utils.o init_philos.o threads.o routine.o actions.o -o philo
+echo Built!
+make: Leaving directory `/Users/jannabel/philo'
+ 

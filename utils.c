@@ -46,3 +46,8 @@ void error_msg(char *str)
 	exit (0);
 }
 
+void	philo_free(t_main *main)
+{
+	free(main->philo);
+	free(main->forks);
+}

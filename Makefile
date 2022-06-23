@@ -1,6 +1,6 @@
 NAME	=	philo
 SRCS	=	main.c utils.c init_philos.c \
-			threads.c routine.c
+			threads.c routine.c actions.c
 			
 OBJS	=	$(SRCS:.c=.o)
 HEADER	=	philo.h

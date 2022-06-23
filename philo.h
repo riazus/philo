@@ -50,6 +50,7 @@ int     	ft_atoi(const char *str);
 void    	error_msg(char *str);
 void		unlock_forks(t_main *main);
 long long	get_time(void);
+void		philo_free(t_main *main);
 
 /*INIT*/
 void		parse_args(char **argv, int argc, t_main *main);
@@ -63,6 +64,14 @@ void    	destroy_mutex(t_main *main);
 /*ROUTINE*/
 void    	*routine(void *args);
 void    	*checker(void *args);
-int		philo_print(t_main *main, int guid, char *status);
+int			philo_print(t_main *main, int guid, char *status);
+
+/*ACTIONS*/
+int			drop_forks(t_main *main, int i);
+int			philo_is_dead(t_main *main, int *i);
+int			ft_think(t_main *main, int i);
+int			ft_sleep(t_main *main, int i);
+int			ft_eat(t_main *main, int i);
+int			case_one_philo(t_main *main);
 
 #endif
