@@ -21,6 +21,8 @@ void    *routine(void *args)
 
     main = (t_main *)args;
     i = main->key;
+    if (main->philo[i].guid % 2 == 0)
+        usleep(50);
     if (main->data.count_of_eat > 0)
     {
         while (main->philo[i].num_of_eates < main->data.count_of_eat && !main->philo_dead)
@@ -66,12 +68,17 @@ void    *checker(void *args)
 int philo_print(t_main *main, int guid, char *status)
 {
     long long   now;
-
+    printf("|%d|\n", main->philo_dead);
+    now = get_time() - main->t0;
     if (main->philo_dead)
         return (0);
-    now = get_time() - main->t0;
     pthread_mutex_lock(&main->write);
-    printf("%d - %lld %s\n", now, guid, status);
+    if (main->philo_dead)
+    {
+        pthread_mutex_unlock(&main->write);
+        return (0);
+    }
+    printf("%lld - %d %s\n", now, guid, status);
     pthread_mutex_unlock(&main->write);
     return (1);
 }

@@ -5,7 +5,7 @@ SRCS	=	main.c utils.c init_philos.c \
 OBJS	=	$(SRCS:.c=.o)
 HEADER	=	philo.h
 CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror #fsanitize=thread -g
+CFLAGS	=	-Wall -Wextra -Werror -pthread#fsanitize=thread -g
 
 all		:	$(NAME)
 
@@ -14,7 +14,7 @@ $(NAME)	:	$(OBJS) $(HEADER)
 			@echo Built!
 
 %.o		:	%.c $(HEADER)
-			@$(CC) -c $< -o $@
+			@$(CC) $(CFLAGS) -c $< -o $@
 			
 clean	:	
 			@rm -rf $(OBJS)

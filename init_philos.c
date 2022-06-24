@@ -32,6 +32,7 @@ void	init_philos(t_main *main)
 	int i;
 	
 	i = 0;
+	main->philo_dead = 0;
 	main->philo = malloc (sizeof(t_philo) * main->data.count_of_philo);
 	if (main->philo == NULL)
 		error_msg("Error while allocate memory for philos\n");

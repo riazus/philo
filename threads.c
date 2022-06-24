@@ -20,7 +20,7 @@ void    create_threads(t_main *main)
     int i;
 
     i = 0;
-    main->philo_dead = 0;
+   // main->philo_dead = 0;
     main->t0 = get_time();
     if (pthread_mutex_init(&main->write, NULL) != 0)
         error_msg("Error while init write mutex\n");

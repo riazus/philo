@@ -10,7 +10,7 @@ int ft_eat(t_main *main, int i)
 		return (0);
 	if (philo_print(main, main->philo[i].guid, FORK) == 0)
 		return (0);
-	if (philo_print(main, main->philo[i].guid, FORK) == 0)
+	if (philo_print(main, main->philo[i].guid, EAT) == 0)
 		return (0);
 	main->philo[i].time_to_die = get_time();
 	usleep(1000 * main->data.time_to_eat);
