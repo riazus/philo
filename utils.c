@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jannabel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 19:16:39 by jannabel          #+#    #+#             */
+/*   Updated: 2022/06/25 19:16:40 by jannabel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_atoi(const char *str)
@@ -14,9 +26,11 @@ int	ft_atoi(const char *str)
 		if (str[i] >= '0' && str[i] <= '9')
 			result = (result * 10) + (str[i] - '0');
 		else
-			error_msg("args contain only nums!\n");
+			error_msg("args contain only nums\n");
 		i++;
 	}
+	if (result <= 0)
+		error_msg("args is 0\n");
 	return (result);
 }
 

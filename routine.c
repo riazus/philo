@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jannabel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 19:16:20 by jannabel          #+#    #+#             */
+/*   Updated: 2022/06/25 19:16:22 by jannabel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	exec_routine(t_main *main, int i)
@@ -20,14 +32,9 @@ void	*routine(void *args)
 	int		i;
 
 	main = (t_main *)args;
-	printf("|%d philo's key in routine|\n", main->key);
 	i = main->key;
-	printf("|%d philo's guid in routine|\n", main->philo[i].guid);
 	if (main->philo[i].guid % 2 == 0)
-	{
-		printf("|%d - is $ 2|\n", main->philo[i].guid);
 		usleep(50);
-	}
 	if (main->data.count_of_eat > 0)
 	{
 		while (main->philo[i].num_of_eates < main->data.count_of_eat
