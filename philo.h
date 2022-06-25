@@ -65,9 +65,9 @@ long long	get_time(void);
 void		philo_free(t_main *main);
 
 /*INIT*/
-void		parse_args(char **argv, int argc, t_main *main);
-void		init_philos(t_main *main);
-void		init_forks(t_main *main);
+int			parse_args(char **argv, int argc, t_main *main);
+int			init_philos(t_main *main);
+int			init_forks(t_main *main);
 
 /*TRHEADS*/
 void		create_threads(t_main *main);

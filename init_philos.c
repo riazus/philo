@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	parse_args(char **argv, int argc, t_main *main)
+int	parse_args(char **argv, int argc, t_main *main)
 {
 	int	i;
 
@@ -34,12 +34,13 @@ void	parse_args(char **argv, int argc, t_main *main)
 		}
 		if (i == 4)
 			main->data.count_of_eat = -1;
+		return (0);
 	}
 	else
-		error_msg("invalid count of args!\n");
+		return (1);
 }
 
-void	init_philos(t_main *main)
+int	init_philos(t_main *main)
 {
 	int	i;
 
@@ -47,7 +48,7 @@ void	init_philos(t_main *main)
 	main->philo_dead = 0;
 	main->philo = malloc (sizeof(t_philo) * main->data.count_of_philo);
 	if (main->philo == NULL)
-		error_msg("Error while allocate memory for philos\n");
+		return (1);
 	while (i < main->data.count_of_philo)
 	{
 		main->philo[i].guid = i + 1;
@@ -60,9 +61,10 @@ void	init_philos(t_main *main)
 			main->philo[i].right_fork = i + 1;
 		i++;
 	}
+	return (0);
 }
 
-void	init_forks(t_main *main)
+int	init_forks(t_main *main)
 {
 	int	i;
 	int	count_ph;
@@ -70,12 +72,13 @@ void	init_forks(t_main *main)
 	count_ph = main->data.count_of_philo;
 	main->forks = malloc(sizeof(pthread_mutex_t) * count_ph + 1);
 	if (main->forks == NULL)
-		error_msg("Error while allcote memory for forks\n");
+		return (1);
 	i = 0;
 	while (i < main->data.count_of_philo)
 	{
 		if (pthread_mutex_init(&main->forks[i], NULL) != 0)
-			error_msg("Error while init mutex");
+			return (1);
 		i++;
 	}
+	return (0);
 }

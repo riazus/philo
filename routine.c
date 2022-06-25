@@ -33,13 +33,17 @@ void	*routine(void *args)
 
 	main = (t_main *)args;
 	i = main->key;
-	if (main->philo[i].guid % 2 == 0)
-		usleep(50);
+	// if (main->philo[i].guid % 2 == 0)
+	// 	usleep(50);
 	if (main->data.count_of_eat > 0)
 	{
 		while (main->philo[i].num_of_eates < main->data.count_of_eat
 			&& !main->philo_dead)
-			exec_routine(main, i);
+			{
+				if (main->philo_dead)
+					break ;
+				exec_routine(main, i);
+			}
 	}
 	else
 	{

@@ -16,22 +16,25 @@ int	main(int argc, char **argv)
 {
 	t_main	main;
 
-	parse_args(argv, argc, &main);
-	init_philos(&main);
-	init_forks(&main);
+	if (parse_args(argv, argc, &main))
+		return (1);
+	if (init_philos(&main))
+		return (1);
+	if (init_forks(&main))
+		return (1);
 	if (main.data.count_of_philo == 1)
 	{
 		if (case_one_philo(&main) == 0)
 			return (1);
 		return (0);
 	}
-	printf("|creat thread|\n");
-	create_threads(&main);
-	printf("------------------------------\n");
-	destroy_mutex(&main);
-	philo_free(&main);
+	if (create_threads(&main))
+		return (1);
+	if (destroy_mutex(&main))
+		return (1);
+	if (philo_free(&main))
+		return (1);
 	return (0);
-	printf("------------------------------\n");
 }
 
 int	case_one_philo(t_main *main)

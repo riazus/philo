@@ -27,7 +27,7 @@ static void	join_threads(t_main *main)
 		error_msg("Error while join spectrator thread\n");
 }
 
-void	create_threads(t_main *main)
+int	create_threads(t_main *main)
 {
 	int	i;
 

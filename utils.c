@@ -57,7 +57,7 @@ long long	get_time(void)
 void	error_msg(char *str)
 {
 	printf("%s", str);
-	exit (1);
+	return (1);
 }
 
 void	philo_free(t_main *main)
