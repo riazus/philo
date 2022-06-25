@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int ft_eat(t_main *main, int i)
+int	ft_eat(t_main *main, int i)
 {
 	if (pthread_mutex_lock(&main->forks[main->philo[i].left_fork]) != 0)
 		return (0);
@@ -18,7 +18,7 @@ int ft_eat(t_main *main, int i)
 	return (1);
 }
 
-int ft_sleep(t_main *main, int i)
+int	ft_sleep(t_main *main, int i)
 {
 	if (philo_print(main, main->philo[i].guid, SLEEP) == 0)
 		return (0);
@@ -26,9 +26,9 @@ int ft_sleep(t_main *main, int i)
 	return (1);
 }
 
-int ft_think(t_main *main, int i)
+int	ft_think(t_main *main, int i)
 {
-    if (philo_print(main, main->philo[i].guid, THINK) == 0)
+	if (philo_print(main, main->philo[i].guid, THINK) == 0)
 		return (0);
 	return (1);
 }
@@ -44,6 +44,7 @@ int	philo_is_dead(t_main *main, int *i)
 	{
 		philo_print(main, main->philo[*i].guid, DIED);
 		main->philo_dead = 1;
+		drop_forks(main, *i);
 		return (1);
 	}
 	i++;

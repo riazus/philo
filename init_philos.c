@@ -1,12 +1,12 @@
 #include "philo.h"
 
-void parse_args(char **argv, int argc, t_main *main)
+void	parse_args(char **argv, int argc, t_main *main)
 {
+	int	i;
+
+	i = 0;
 	if (argc == 5 || argc == 6)
 	{
-		int i;
-
-		i = 0;
 		while (argv[++i])
 		{
 			if (i == 1 && argv[i] != NULL)
@@ -29,8 +29,8 @@ void parse_args(char **argv, int argc, t_main *main)
 
 void	init_philos(t_main *main)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	main->philo_dead = 0;
 	main->philo = malloc (sizeof(t_philo) * main->data.count_of_philo);
@@ -53,8 +53,10 @@ void	init_philos(t_main *main)
 void	init_forks(t_main *main)
 {
 	int	i;
+	int	count_ph;
 
-	main->forks = malloc(sizeof(pthread_mutex_t) * main->data.count_of_philo + 1);
+	count_ph = main->data.count_of_philo;
+	main->forks = malloc(sizeof(pthread_mutex_t) * count_ph + 1);
 	if (main->forks == NULL)
 		error_msg("Error while allcote memory for forks\n");
 	i = 0;
