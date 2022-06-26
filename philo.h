@@ -59,7 +59,7 @@ typedef struct s_main
 
 /*UTILS*/
 int			ft_atoi(const char *str);
-void		error_msg(char *str);
+//void		error_msg(char *str);
 void		unlock_forks(t_main *main);
 long long	get_time(void);
 void		philo_free(t_main *main);
@@ -70,8 +70,8 @@ int			init_philos(t_main *main);
 int			init_forks(t_main *main);
 
 /*TRHEADS*/
-void		create_threads(t_main *main);
-void		destroy_mutex(t_main *main);
+int			create_threads(t_main *main);
+int			destroy_mutex(t_main *main);
 
 /*ROUTINE*/
 void		*routine(void *args);

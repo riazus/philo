@@ -20,17 +20,17 @@ int	ft_atoi(const char *str)
 	i = 0;
 	result = 0;
 	if (str[i] == '-')
-		error_msg("args cannot be negativ!\n");
+		return (-2);
 	while (str[i])
 	{
 		if (str[i] >= '0' && str[i] <= '9')
 			result = (result * 10) + (str[i] - '0');
 		else
-			error_msg("args contain only nums\n");
+			return (-2);
 		i++;
 	}
 	if (result <= 0)
-		error_msg("args is 0\n");
+		return (-2);
 	return (result);
 }
 
@@ -54,11 +54,11 @@ long long	get_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec * 0.001));
 }
 
-void	error_msg(char *str)
-{
-	printf("%s", str);
-	return (1);
-}
+// void	error_msg(char *str)
+// {
+// 	printf("%s", str);
+// 	return (1);
+// }
 
 void	philo_free(t_main *main)
 {

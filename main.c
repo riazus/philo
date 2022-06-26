@@ -32,8 +32,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (destroy_mutex(&main))
 		return (1);
-	if (philo_free(&main))
-		return (1);
+	philo_free(&main);
 	return (0);
 }
 
@@ -41,7 +40,7 @@ int	case_one_philo(t_main *main)
 {
 	printf("|lol1|\n");
 	if (pthread_mutex_init(&main->write, NULL) != 0)
-		return (0);
+		return (1);
 	printf("|lol2|\n");
 	main->t0 = get_time();
 	philo_print(main, 1, FORK);

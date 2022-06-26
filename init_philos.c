@@ -12,6 +12,21 @@
 
 #include "philo.h"
 
+static int	check_args(t_main *main)
+{
+	if (main->data.count_of_philo == -2
+		|| main->data.time_to_die == -2
+		|| main->data.time_to_eat == -2
+		|| main->data.time_to_sleep == -2
+		|| main->data.count_of_eat == -2)
+		{
+			printf("Invalid args.\n");
+			return (1);
+		}
+	else
+		return (0);
+}
+
 int	parse_args(char **argv, int argc, t_main *main)
 {
 	int	i;
@@ -34,7 +49,7 @@ int	parse_args(char **argv, int argc, t_main *main)
 		}
 		if (i == 4)
 			main->data.count_of_eat = -1;
-		return (0);
+		return check_args(main);
 	}
 	else
 		return (1);

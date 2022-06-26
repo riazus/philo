@@ -62,7 +62,7 @@ void	*checker(void *args)
 	int		i;
 
 	main = (t_main *)args;
-	i = 0;
+	i = 1;
 	if (main->data.count_of_eat > 0)
 	{
 		while (main->philo[i].num_of_eates < main->data.count_of_eat
@@ -70,6 +70,7 @@ void	*checker(void *args)
 		{
 			if (philo_is_dead(main, &i))
 				break ;
+			i++;
 		}
 	}
 	else
@@ -78,6 +79,7 @@ void	*checker(void *args)
 		{
 			if (philo_is_dead(main, &i))
 				break ;
+			i++;
 		}
 	}
 	return (NULL);
