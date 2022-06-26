@@ -33,6 +33,8 @@ void	*routine(void *args)
 
 	main = (t_main *)args;
 	i = main->key;
+	if (i % 2 == 0)
+		usleep(50);
 	if (main->data.count_of_eat > 0)
 	{
 		while (main->philo[i].num_of_eates < main->data.count_of_eat
