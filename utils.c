@@ -54,12 +54,6 @@ long long	get_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec * 0.001));
 }
 
-// void	error_msg(char *str)
-// {
-// 	printf("%s", str);
-// 	return (1);
-// }
-
 void	philo_free(t_main *main)
 {
 	free(main->philo);

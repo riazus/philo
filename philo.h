@@ -59,7 +59,6 @@ typedef struct s_main
 
 /*UTILS*/
 int			ft_atoi(const char *str);
-//void		error_msg(char *str);
 void		unlock_forks(t_main *main);
 long long	get_time(void);
 void		philo_free(t_main *main);

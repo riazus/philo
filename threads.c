@@ -39,7 +39,6 @@ int	create_threads(t_main *main)
 	while (i < main->data.count_of_philo)
 	{
 		main->key = i;
-		//printf("|%d philo's key in create|\n", main->key);
 		if (pthread_create(&main->philo[i].id, NULL, &routine, (void *)main)
 			!= 0)
 			return (1);

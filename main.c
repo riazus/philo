@@ -38,10 +38,8 @@ int	main(int argc, char **argv)
 
 int	case_one_philo(t_main *main)
 {
-	printf("|lol1|\n");
 	if (pthread_mutex_init(&main->write, NULL) != 0)
 		return (1);
-	printf("|lol2|\n");
 	main->t0 = get_time();
 	philo_print(main, 1, FORK);
 	usleep(main->data.time_to_die * 1000);
